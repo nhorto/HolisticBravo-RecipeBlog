@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holistic Bravo - Launch Dashboard</title>
+<style>
+  :root {
+    --purple: #C795F0;
+    --purple-dark: #A66DD4;
+    --purple-light: #E8D5F8;
+    --green: #7FE3B1;
+    --green-dark: #5CC98E;
+    --green-light: #D4F5E5;
+    --bg: #F7F7FB;
+    --sidebar-bg: #1a1a2e;
+    --sidebar-text: #e0e0e0;
+    --card-bg: #ffffff;
+    --text: #2d2d3a;
+    --text-light: #6b6b80;
+    --border: #e8e8f0;
+    --pending-bg: #f0f0f5;
+    --pending-text: #6b6b80;
+    --progress-bg: #f0e6fa;
+    --progress-text: #8b5fc0;
+    --complete-bg: #d4f5e5;
+    --complete-text: #3a8a5c;
+    --danger: #e74c3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+  }
+
+  .sidebar h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .sidebar .subtitle {
+    font-size: 12px;
+    color: var(--purple);
+    margin-bottom: 32px;
+  }
+
+  .nav-item {
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 4px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-item:hover { background: rgba(255,255,255,0.08); }
+  .nav-item.active { background: var(--purple); color: white; }
+
+  .sidebar-stats {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .sidebar-stats .stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 4px 0;
+  }
+
+  .sidebar-stats .stat-value { color: var(--purple); font-weight: 600; }
+
+  .countdown {
+    background: rgba(199,149,240,0.15);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .countdown .days { font-size: 28px; font-weight: 700; color: var(--purple); }
+  .countdown .label { font-size: 11px; color: var(--text-light); }
+
+  /* Main Content */
+  .main {
+    flex: 1;
+    margin-left: 240px;
+    padding: 24px 32px;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .top-bar h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+  }
+
+  .btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .btn-primary {
+    background: var(--purple);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--green); color: var(--text); }
+
+  .btn-sm {
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-danger:hover { background: #c0392b; }
+
+  /* Progress bar */
+  .progress-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-header span { font-size: 14px; color: var(--text-light); }
+  .progress-header strong { font-size: 18px; }
+
+  .progress-bar {
+    height: 10px;
+    background: var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+    background: linear-gradient(90deg, var(--purple), var(--green));
+  }
+
+  .quick-stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .quick-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .quick-stat .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-pending { background: var(--pending-text); }
+  .dot-progress { background: var(--purple); }
+  .dot-complete { background: var(--green); }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-bar select, .filter-bar input {
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    background: var(--card-bg);
+    color: var(--text);
+  }
+
+  .filter-bar input { flex: 1; min-width: 200px; }
+
+  /* Status badge */
+  .status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .status-badge:hover { transform: scale(1.05); }
+
+  .status-pending { background: var(--pending-bg); color: var(--pending-text); }
+  .status-in_progress { background: var(--progress-bg); color: var(--progress-text); }
+  .status-completed { background: var(--complete-bg); color: var(--complete-text); }
+
+  /* Owner badge */
+  .owner-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .owner-nicholas { background: #e8d5f8; color: #6b3fa0; }
+  .owner-crystal { background: #d4f5e5; color: #2d7a50; }
+
+  /* Category badge */
+  .cat-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    background: #f0f0f5;
+    color: var(--text-light);
+  }
+
+  /* List View Table */
+  .task-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .task-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #fafafc;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .task-table th:hover { color: var(--purple); }
+  .task-table th .sort-arrow { font-size: 10px; margin-left: 4px; }
+
+  .task-table td {
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .task-table tr:last-child td { border-bottom: none; }
+  .task-table tr:hover td { background: #fafafc; }
+
+  .task-title {
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text);
+  }
+  .task-title:hover { color: var(--purple); }
+
+  .hours { color: var(--text-light); font-size: 12px; }
+
+  /* Week View */
+  .week-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .week-column {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .week-column.current-week {
+    border: 2px solid var(--purple);
+  }
+
+  .week-header {
+    margin-bottom: 12px;
+  }
+
+  .week-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .week-header .week-dates {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  .week-progress {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 8px 0 12px;
+    overflow: hidden;
+  }
+
+  .week-progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--green));
+  }
+
+  .week-owner-section {
+    margin-bottom: 12px;
+  }
+
+  .week-owner-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .week-task {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .week-task-title {
+    flex: 1;
+    cursor: pointer;
+  }
+  .week-task-title:hover { color: var(--purple); }
+
+  /* Calendar View */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .cal-header {
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    background: #fafafc;
+  }
+
+  .cal-day {
+    min-height: 100px;
+    padding: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .cal-day.outside { background: #fafafc; opacity: 0.5; }
+  .cal-day.today { border-color: var(--purple); border-width: 2px; }
+  .cal-day.launch-day { background: #fff5f5; border-color: var(--danger); border-width: 2px; }
+
+  .cal-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+
+  .cal-task {
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+
+  .cal-task.status-pending { background: var(--pending-bg); color: var(--pending-text); }
+  .cal-task.status-in_progress { background: var(--progress-bg); color: var(--progress-text); }
+  .cal-task.status-completed { background: var(--complete-bg); color: var(--complete-text); }
+
+  .cal-more {
+    font-size: 10px;
+    color: var(--purple);
+    cursor: pointer;
+    text-align: center;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px;
+    width: 500px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+
+  .modal h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg); }
+
+  /* Task detail panel */
+  .task-detail {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .task-detail h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .task-detail p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .task-detail-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .hidden { display: none !important; }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .week-view { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { width: 60px; padding: 16px 8px; }
+    .sidebar h1, .sidebar .subtitle, .sidebar-stats, .nav-item span { display: none; }
+    .main { margin-left: 60px; padding: 16px; }
+    .week-view { grid-template-columns: 1fr; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="sidebar">
+  <h1>Holistic Bravo</h1>
+  <div class="subtitle">Launch Dashboard</div>
+
+  <div class="nav-item active" data-view="list" onclick="switchView('list')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+    <span>List View</span>
+  </div>
+  <div class="nav-item" data-view="week" onclick="switchView('week')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M1 5h14"/></svg>
+    <span>Week View</span>
+  </div>
+  <div class="nav-item" data-view="calendar" onclick="switchView('calendar')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="14" height="13" rx="2"/><path d="M1 6h14M5 1v3M11 1v3"/></svg>
+    <span>Calendar</span>
+  </div>
+
+  <div class="sidebar-stats">
+    <div class="stat-row"><span>Total Tasks</span><span class="stat-value" id="stat-total">0</span></div>
+    <div class="stat-row"><span>Nicholas</span><span class="stat-value" id="stat-nicholas">0</span></div>
+    <div class="stat-row"><span>Crystal</span><span class="stat-value" id="stat-crystal">0</span></div>
+    <div class="stat-row"><span>Est. Hours</span><span class="stat-value" id="stat-hours">0</span></div>
+    <div class="countdown">
+      <div class="days" id="countdown-days">28</div>
+      <div class="label">days to launch</div>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="top-bar">
+    <h2 id="view-title">All Tasks</h2>
+    <button class="btn btn-primary" onclick="openAddModal()">+ New Task</button>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-header">
+      <span>Overall Progress</span>
+      <strong id="progress-text">0 / 0 tasks (0%)</strong>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="quick-stats">
+      <div class="quick-stat"><div class="dot dot-complete"></div><span id="qs-completed">0 completed</span></div>
+      <div class="quick-stat"><div class="dot dot-progress"></div><span id="qs-progress">0 in progress</span></div>
+      <div class="quick-stat"><div class="dot dot-pending"></div><span id="qs-pending">0 pending</span></div>
+    </div>
+  </div>
+
+  <!-- Task Detail Panel (shown when clicking a task) -->
+  <div class="task-detail hidden" id="task-detail">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <h3 id="detail-title"></h3>
+      <button class="btn btn-sm btn-ghost" onclick="closeDetail()">Close</button>
+    </div>
+    <p id="detail-desc"></p>
+    <div class="task-detail-meta">
+      <span class="status-badge" id="detail-status" onclick="cycleDetailStatus()"></span>
+      <span class="owner-badge" id="detail-owner"></span>
+      <span class="cat-badge" id="detail-category"></span>
+      <span class="hours" id="detail-hours"></span>
+      <span class="hours" id="detail-week"></span>
+      <button class="btn btn-sm btn-primary" id="detail-edit" onclick="openEditModal()">Edit</button>
+      <button class="btn btn-sm btn-danger" id="detail-delete" onclick="deleteTask()">Delete</button>
+    </div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div id="view-list">
+    <div class="filter-bar">
+      <input type="text" id="filter-search" placeholder="Search tasks..." oninput="renderList()">
+      <select id="filter-owner" onchange="renderList()">
+        <option value="">All Owners</option>
+        <option value="Nicholas">Nicholas</option>
+        <option value="Crystal">Crystal</option>
+      </select>
+      <select id="filter-week" onchange="renderList()">
+        <option value="">All Weeks</option>
+        <option value="1">Week 1</option>
+        <option value="2">Week 2</option>
+        <option value="3">Week 3</option>
+        <option value="4">Week 4</option>
+      </select>
+      <select id="filter-category" onchange="renderList()">
+        <option value="">All Categories</option>
+      </select>
+      <select id="filter-status" onchange="renderList()">
+        <option value="">All Statuses</option>
+        <option value="pending">Pending</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th onclick="sortBy('status')" style="width:110px">Status <span class="sort-arrow"></span></th>
+          <th onclick="sortBy('title')">Title <span class="sort-arrow"></span></th>
+          <th onclick="sortBy('owner')" style="width:100px">Owner <span class="sort-arrow"></span></th>
+          <th onclick="sortBy('week')" style="width:70px">Week <span class="sort-arrow"></span></th>
+          <th onclick="sortBy('category')" style="width:100px">Category <span class="sort-arrow"></span></th>
+          <th onclick="sortBy('estimatedHours')" style="width:60px">Hrs <span class="sort-arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody id="task-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- WEEK VIEW -->
+  <div id="view-week" class="hidden">
+    <div class="week-view" id="week-columns"></div>
+  </div>
+
+  <!-- CALENDAR VIEW -->
+  <div id="view-calendar" class="hidden">
+    <div class="calendar-grid" id="calendar-grid"></div>
+  </div>
+</main>
+
+<!-- Add/Edit Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="modal-title">New Task</h3>
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" id="form-title">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="form-desc"></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="form-group">
+        <label>Owner</label>
+        <select id="form-owner">
+          <option value="Nicholas">Nicholas</option>
+          <option value="Crystal">Crystal</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Week</label>
+        <select id="form-week">
+          <option value="1">Week 1</option>
+          <option value="2">Week 2</option>
+          <option value="3">Week 3</option>
+          <option value="4">Week 4</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select id="form-category">
+          <option value="UI">UI</option>
+          <option value="Content">Content</option>
+          <option value="Images">Images</option>
+          <option value="CMS">CMS</option>
+          <option value="Research">Research</option>
+          <option value="SEO">SEO</option>
+          <option value="Launch">Launch</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Estimated Hours</label>
+        <input type="number" id="form-hours" min="0.5" step="0.5" value="2">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="document.getElementById('modal-overlay').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveTask()">Save Task</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let data = { project: {}, weeks: [], tasks: [] };
+let currentView = 'list';
+let sortField = 'week';
+let sortDir = 1;
+let selectedTaskId = null;
+
+// Fetch data
+async function loadData() {
+  const res = await fetch('/api/tasks');
+  data = await res.json();
+  updateAll();
+}
+
+function updateAll() {
+  updateStats();
+  renderCurrentView();
+  populateCategoryFilter();
+}
+
+function updateStats() {
+  const tasks = data.tasks;
+  const completed = tasks.filter(t => t.status === 'completed').length;
+  const inProgress = tasks.filter(t => t.status === 'in_progress').length;
+  const pending = tasks.filter(t => t.status === 'pending').length;
+  const totalHours = tasks.reduce((s, t) => s + (t.estimatedHours || 0), 0);
+  const pct = tasks.length ? Math.round((completed / tasks.length) * 100) : 0;
+
+  document.getElementById('stat-total').textContent = tasks.length;
+  document.getElementById('stat-nicholas').textContent = tasks.filter(t => t.owner === 'Nicholas').length;
+  document.getElementById('stat-crystal').textContent = tasks.filter(t => t.owner === 'Crystal').length;
+  document.getElementById('stat-hours').textContent = totalHours;
+  document.getElementById('progress-text').textContent = `${completed} / ${tasks.length} tasks (${pct}%)`;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('qs-completed').textContent = completed + ' completed';
+  document.getElementById('qs-progress').textContent = inProgress + ' in progress';
+  document.getElementById('qs-pending').textContent = pending + ' pending';
+
+  // Countdown
+  const launch = new Date(data.project.launchDate);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const days = Math.max(0, Math.ceil((launch - today) / 86400000));
+  document.getElementById('countdown-days').textContent = days;
+}
+
+function populateCategoryFilter() {
+  const cats = [...new Set(data.tasks.map(t => t.category))].sort();
+  const sel = document.getElementById('filter-category');
+  const current = sel.value;
+  sel.innerHTML = '<option value="">All Categories</option>';
+  cats.forEach(c => {
+    sel.innerHTML += `<option value="${c}">${c}</option>`;
+  });
+  sel.value = current;
+}
+
+// View switching
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === view));
+  document.getElementById('view-list').classList.toggle('hidden', view !== 'list');
+  document.getElementById('view-week').classList.toggle('hidden', view !== 'week');
+  document.getElementById('view-calendar').classList.toggle('hidden', view !== 'calendar');
+
+  const titles = { list: 'All Tasks', week: 'Week View', calendar: 'Calendar' };
+  document.getElementById('view-title').textContent = titles[view];
+  renderCurrentView();
+}
+
+function renderCurrentView() {
+  if (currentView === 'list') renderList();
+  else if (currentView === 'week') renderWeek();
+  else if (currentView === 'calendar') renderCalendar();
+}
+
+// LIST VIEW
+function getFilteredTasks() {
+  let tasks = [...data.tasks];
+  const search = document.getElementById('filter-search').value.toLowerCase();
+  const owner = document.getElementById('filter-owner').value;
+  const week = document.getElementById('filter-week').value;
+  const category = document.getElementById('filter-category').value;
+  const status = document.getElementById('filter-status').value;
+
+  if (search) tasks = tasks.filter(t => t.title.toLowerCase().includes(search) || (t.description && t.description.toLowerCase().includes(search)));
+  if (owner) tasks = tasks.filter(t => t.owner === owner);
+  if (week) tasks = tasks.filter(t => t.week === parseInt(week));
+  if (category) tasks = tasks.filter(t => t.category === category);
+  if (status) tasks = tasks.filter(t => t.status === status);
+
+  const statusOrder = { pending: 0, in_progress: 1, completed: 2 };
+  tasks.sort((a, b) => {
+    let av, bv;
+    if (sortField === 'status') { av = statusOrder[a.status]; bv = statusOrder[b.status]; }
+    else if (sortField === 'estimatedHours') { av = a.estimatedHours; bv = b.estimatedHours; }
+    else if (sortField === 'week') { av = a.week; bv = b.week; }
+    else { av = (a[sortField] || '').toString().toLowerCase(); bv = (b[sortField] || '').toString().toLowerCase(); }
+    if (av < bv) return -1 * sortDir;
+    if (av > bv) return 1 * sortDir;
+    return 0;
+  });
+
+  return tasks;
+}
+
+function sortBy(field) {
+  if (sortField === field) sortDir *= -1;
+  else { sortField = field; sortDir = 1; }
+  renderList();
+}
+
+function renderList() {
+  const tasks = getFilteredTasks();
+  const tbody = document.getElementById('task-tbody');
+  tbody.innerHTML = tasks.map(t => `
+    <tr>
+      <td><span class="status-badge status-${t.status}" onclick="cycleStatus('${t.id}')">${formatStatus(t.status)}</span></td>
+      <td><span class="task-title" onclick="showDetail('${t.id}')">${esc(t.title)}</span></td>
+      <td><span class="owner-badge owner-${t.owner.toLowerCase()}">${t.owner}</span></td>
+      <td>${t.week}</td>
+      <td><span class="cat-badge">${t.category}</span></td>
+      <td class="hours">${t.estimatedHours}h</td>
+    </tr>
+  `).join('');
+}
+
+function formatStatus(s) {
+  return s === 'in_progress' ? 'In Progress' : s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function esc(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+// Status cycling
+async function cycleStatus(id) {
+  const task = data.tasks.find(t => t.id === id);
+  if (!task) return;
+  const next = { pending: 'in_progress', in_progress: 'completed', completed: 'pending' };
+  const newStatus = next[task.status];
+
+  await fetch(`/api/tasks/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: newStatus }),
+  });
+
+  task.status = newStatus;
+  task.completedAt = newStatus === 'completed' ? new Date().toISOString().split('T')[0] : null;
+  updateAll();
+
+  if (selectedTaskId === id) {
+    document.getElementById('detail-status').className = `status-badge status-${newStatus}`;
+    document.getElementById('detail-status').textContent = formatStatus(newStatus);
+  }
+}
+
+// Task detail
+function showDetail(id) {
+  selectedTaskId = id;
+  const t = data.tasks.find(t => t.id === id);
+  if (!t) return;
+
+  document.getElementById('detail-title').textContent = t.title;
+  document.getElementById('detail-desc').textContent = t.description || 'No description.';
+  document.getElementById('detail-status').className = `status-badge status-${t.status}`;
+  document.getElementById('detail-status').textContent = formatStatus(t.status);
+  document.getElementById('detail-owner').className = `owner-badge owner-${t.owner.toLowerCase()}`;
+  document.getElementById('detail-owner').textContent = t.owner;
+  document.getElementById('detail-category').textContent = t.category;
+  document.getElementById('detail-hours').textContent = t.estimatedHours + 'h estimated';
+  document.getElementById('detail-week').textContent = 'Week ' + t.week;
+  document.getElementById('task-detail').classList.remove('hidden');
+}
+
+function closeDetail() {
+  selectedTaskId = null;
+  document.getElementById('task-detail').classList.add('hidden');
+}
+
+function cycleDetailStatus() {
+  if (selectedTaskId) cycleStatus(selectedTaskId);
+}
+
+async function deleteTask() {
+  if (!selectedTaskId) return;
+  if (!confirm('Delete this task?')) return;
+
+  await fetch(`/api/tasks/${selectedTaskId}`, { method: 'DELETE' });
+  data.tasks = data.tasks.filter(t => t.id !== selectedTaskId);
+  closeDetail();
+  updateAll();
+}
+
+// WEEK VIEW
+function renderWeek() {
+  const container = document.getElementById('week-columns');
+  const today = new Date();
+
+  container.innerHTML = data.weeks.map(w => {
+    const weekTasks = data.tasks.filter(t => t.week === w.id);
+    const completed = weekTasks.filter(t => t.status === 'completed').length;
+    const pct = weekTasks.length ? Math.round((completed / weekTasks.length) * 100) : 0;
+
+    const weekStart = new Date(w.startDate);
+    const weekEnd = new Date(w.endDate);
+    const isCurrent = today >= weekStart && today <= weekEnd;
+
+    const nicholasTasks = weekTasks.filter(t => t.owner === 'Nicholas');
+    const crystalTasks = weekTasks.filter(t => t.owner === 'Crystal');
+
+    return `
+      <div class="week-column ${isCurrent ? 'current-week' : ''}">
+        <div class="week-header">
+          <h3>Week ${w.id}: ${w.name}</h3>
+          <div class="week-dates">${formatDate(w.startDate)} - ${formatDate(w.endDate)}</div>
+        </div>
+        <div class="week-progress"><div class="week-progress-fill" style="width:${pct}%"></div></div>
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:12px">${completed}/${weekTasks.length} complete (${pct}%)</div>
+
+        ${nicholasTasks.length ? `
+          <div class="week-owner-section">
+            <div class="week-owner-label">Nicholas</div>
+            ${nicholasTasks.map(t => weekTaskCard(t)).join('')}
+          </div>
+        ` : ''}
+
+        ${crystalTasks.length ? `
+          <div class="week-owner-section">
+            <div class="week-owner-label">Crystal</div>
+            ${crystalTasks.map(t => weekTaskCard(t)).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function weekTaskCard(t) {
+  return `
+    <div class="week-task">
+      <span class="week-task-title" onclick="switchView('list');showDetail('${t.id}')">${esc(t.title)}</span>
+      <span class="status-badge status-${t.status}" onclick="cycleStatus('${t.id}')" style="font-size:9px;padding:2px 6px">${formatStatus(t.status)}</span>
+    </div>
+  `;
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// CALENDAR VIEW
+function renderCalendar() {
+  const grid = document.getElementById('calendar-grid');
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  // Calendar from Feb 15 (Sun) to Mar 21 (Sat) to cover the full range
+  const calStart = new Date('2026-02-15T00:00:00');
+  const calEnd = new Date('2026-03-21T23:59:59');
+  const projectStart = new Date(data.project.startDate + 'T00:00:00');
+  const launchDate = new Date(data.project.launchDate + 'T00:00:00');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  let html = dayNames.map(d => `<div class="cal-header">${d}</div>`).join('');
+
+  // Adjust to start on Sunday
+  const cursor = new Date(calStart);
+  while (cursor.getDay() !== 0) cursor.setDate(cursor.getDate() - 1);
+
+  while (cursor <= calEnd) {
+    const dateStr = cursor.toISOString().split('T')[0];
+    const isToday = cursor.getTime() === today.getTime();
+    const isLaunch = cursor.getTime() === launchDate.getTime();
+    const isOutside = cursor < projectStart && cursor < new Date('2026-02-16') || cursor > new Date('2026-03-16');
+
+    // Find which week this day belongs to
+    let dayWeek = null;
+    for (const w of data.weeks) {
+      const ws = new Date(w.startDate + 'T00:00:00');
+      const we = new Date(w.endDate + 'T00:00:00');
+      if (cursor >= ws && cursor <= we) { dayWeek = w.id; break; }
+    }
+
+    const dayTasks = dayWeek ? data.tasks.filter(t => t.week === dayWeek) : [];
+    // Spread tasks across the week days (Mon-Fri)
+    const dayOfWeek = cursor.getDay();
+    const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
+    let tasksToShow = [];
+
+    if (isWeekday && dayWeek) {
+      const weekTasks = data.tasks.filter(t => t.week === dayWeek);
+      const weekdayIndex = dayOfWeek - 1; // 0-4
+      const perDay = Math.ceil(weekTasks.length / 5);
+      tasksToShow = weekTasks.slice(weekdayIndex * perDay, (weekdayIndex + 1) * perDay);
+    }
+
+    const classes = ['cal-day'];
+    if (isOutside) classes.push('outside');
+    if (isToday) classes.push('today');
+    if (isLaunch) classes.push('launch-day');
+
+    html += `<div class="${classes.join(' ')}">
+      <div class="cal-date">${cursor.getDate()}${isLaunch ? ' 🚀' : ''}</div>
+      ${tasksToShow.slice(0, 3).map(t =>
+        `<div class="cal-task status-${t.status}" onclick="showDetail('${t.id}')" title="${esc(t.title)}">${esc(t.title)}</div>`
+      ).join('')}
+      ${tasksToShow.length > 3 ? `<div class="cal-more">+${tasksToShow.length - 3} more</div>` : ''}
+    </div>`;
+
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  grid.innerHTML = html;
+}
+
+// ADD/EDIT TASK MODAL
+let editingTaskId = null;
+
+function openAddModal() {
+  editingTaskId = null;
+  document.getElementById('modal-title').textContent = 'New Task';
+  document.getElementById('form-title').value = '';
+  document.getElementById('form-desc').value = '';
+  document.getElementById('form-owner').value = 'Nicholas';
+  document.getElementById('form-week').value = '1';
+  document.getElementById('form-category').value = 'UI';
+  document.getElementById('form-hours').value = '2';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function openEditModal() {
+  if (!selectedTaskId) return;
+  const t = data.tasks.find(t => t.id === selectedTaskId);
+  if (!t) return;
+  editingTaskId = selectedTaskId;
+  document.getElementById('modal-title').textContent = 'Edit Task';
+  document.getElementById('form-title').value = t.title;
+  document.getElementById('form-desc').value = t.description || '';
+  document.getElementById('form-owner').value = t.owner;
+  document.getElementById('form-week').value = t.week;
+  document.getElementById('form-category').value = t.category;
+  document.getElementById('form-hours').value = t.estimatedHours || 2;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+}
+
+async function saveTask() {
+  const title = document.getElementById('form-title').value.trim();
+  if (!title) { alert('Title is required'); return; }
+
+  const body = {
+    title,
+    description: document.getElementById('form-desc').value.trim(),
+    owner: document.getElementById('form-owner').value,
+    week: parseInt(document.getElementById('form-week').value),
+    category: document.getElementById('form-category').value,
+    estimatedHours: parseFloat(document.getElementById('form-hours').value) || 2,
+  };
+
+  if (editingTaskId) {
+    // Edit existing task
+    const res = await fetch(`/api/tasks/${editingTaskId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const updated = await res.json();
+    const idx = data.tasks.findIndex(t => t.id === editingTaskId);
+    if (idx !== -1) Object.assign(data.tasks[idx], updated);
+    // Refresh detail panel if open
+    if (selectedTaskId === editingTaskId) showDetail(editingTaskId);
+    editingTaskId = null;
+  } else {
+    // Create new task
+    const res = await fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const newTask = await res.json();
+    data.tasks.push(newTask);
+  }
+
+  document.getElementById('modal-overlay').classList.remove('open');
+  updateAll();
+}
+
+// Keyboard shortcut
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('modal-overlay').classList.remove('open');
+    closeDetail();
+  }
+});
+
+// Init
+loadData();
+</script>
+</body>
+</html>

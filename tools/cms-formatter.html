@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holistic Bravo - CMS Content Formatter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f0f13;
+            color: #e4e4e7;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a24, #252535);
+            border-bottom: 1px solid rgba(199,149,240,0.2);
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #C795F0;
+        }
+        .header .subtitle {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr 1fr;
+            gap: 1.5rem;
+            height: calc(100vh - 70px);
+        }
+
+        /* Sidebar - Section picker */
+        .sidebar {
+            background: #1a1a24;
+            border-radius: 12px;
+            border: 1px solid #2a2a3a;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+            margin-bottom: 0.75rem;
+            padding: 0 0.5rem;
+        }
+        .section-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.65rem 0.75rem;
+            border: none;
+            background: transparent;
+            color: #ccc;
+            font-family: inherit;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-bottom: 2px;
+        }
+        .section-btn:hover { background: #252535; color: #fff; }
+        .section-btn.active { background: rgba(199,149,240,0.15); color: #C795F0; font-weight: 600; }
+        .section-btn .hint {
+            display: block;
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        /* Editor panel */
+        .editor-panel {
+            background: #1a1a24;
+            border-radius: 12px;
+            border: 1px solid #2a2a3a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .panel-header {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .panel-header h2 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #C795F0;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            background: #16161f;
+        }
+        .toolbar button {
+            padding: 0.35rem 0.65rem;
+            border: 1px solid #333;
+            background: #1e1e2e;
+            color: #ccc;
+            font-family: inherit;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .toolbar button:hover { background: #2a2a3a; border-color: #C795F0; color: #fff; }
+        .toolbar button.active { background: rgba(199,149,240,0.2); border-color: #C795F0; color: #C795F0; }
+        .toolbar .sep {
+            width: 1px;
+            background: #333;
+            margin: 0 4px;
+        }
+
+        /* Rich text editor area */
+        .editor-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        .rich-editor {
+            min-height: 300px;
+            outline: none;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #e4e4e7;
+        }
+        .rich-editor:empty::before {
+            content: attr(data-placeholder);
+            color: #555;
+        }
+        .rich-editor b, .rich-editor strong { color: #C795F0; }
+        .rich-editor i, .rich-editor em { color: #7FE3B1; }
+        .rich-editor ul, .rich-editor ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+        .rich-editor li { margin-bottom: 0.3rem; }
+        .rich-editor a { color: #7FE3B1; text-decoration: underline; }
+
+        /* FAQ editor */
+        .faq-editor { padding: 1rem; flex: 1; overflow-y: auto; }
+        .faq-pair {
+            background: #16161f;
+            border: 1px solid #2a2a3a;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .faq-pair label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #888;
+            margin-bottom: 0.35rem;
+        }
+        .faq-pair input, .faq-pair textarea {
+            width: 100%;
+            padding: 0.5rem 0.65rem;
+            border: 1px solid #333;
+            background: #1a1a24;
+            color: #e4e4e7;
+            font-family: inherit;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .faq-pair input:focus, .faq-pair textarea:focus { border-color: #C795F0; }
+        .faq-pair textarea {
+            min-height: 80px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        .faq-pair .remove-btn {
+            float: right;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0;
+        }
+        .faq-pair .remove-btn:hover { color: #f44; }
+        .add-faq-btn {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px dashed #444;
+            background: transparent;
+            color: #888;
+            font-family: inherit;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .add-faq-btn:hover { border-color: #C795F0; color: #C795F0; }
+
+        /* Numbered steps editor */
+        .steps-editor { padding: 1rem; flex: 1; overflow-y: auto; }
+        .step-item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        .step-number {
+            min-width: 28px;
+            height: 28px;
+            background: rgba(199,149,240,0.15);
+            color: #C795F0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .step-item textarea {
+            flex: 1;
+            padding: 0.5rem 0.65rem;
+            border: 1px solid #333;
+            background: #1a1a24;
+            color: #e4e4e7;
+            font-family: inherit;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            outline: none;
+            min-height: 40px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        .step-item textarea:focus { border-color: #C795F0; }
+        .step-item .remove-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.25rem;
+            margin-top: 4px;
+        }
+        .step-item .remove-btn:hover { color: #f44; }
+
+        /* Bullet list editor */
+        .bullet-editor { padding: 1rem; flex: 1; overflow-y: auto; }
+        .bullet-item {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        .bullet-dot {
+            min-width: 8px;
+            height: 8px;
+            background: #7FE3B1;
+            border-radius: 50%;
+            margin-top: 12px;
+        }
+
+        /* Output panel */
+        .output-panel {
+            background: #1a1a24;
+            border-radius: 12px;
+            border: 1px solid #2a2a3a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .output-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        .output-text {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            color: #aaa;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #12121a;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #222;
+            min-height: 200px;
+        }
+
+        /* Preview panel */
+        .preview-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2a2a3a;
+        }
+        .preview-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .preview-box {
+            background: #fff;
+            color: #2D2D2D;
+            padding: 1.25rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .preview-box strong { font-weight: 700; }
+        .preview-box em { font-style: italic; }
+        .preview-box ul, .preview-box ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+        .preview-box li { margin-bottom: 0.3rem; }
+        .preview-box p { margin: 0 0 0.75rem 0; }
+        .preview-box a { color: #C795F0; text-decoration: underline; }
+
+        /* Buttons */
+        .copy-btn {
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, #C795F0, #a070d0);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(199,149,240,0.3); }
+        .copy-btn.copied { background: linear-gradient(135deg, #7FE3B1, #50b080); }
+
+        .clear-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: #888;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .clear-btn:hover { border-color: #666; color: #ccc; }
+
+        /* Link dialog */
+        .link-dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .link-dialog-overlay.visible { display: flex; }
+        .link-dialog {
+            background: #1a1a24;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 400px;
+        }
+        .link-dialog h3 { font-size: 1rem; margin-bottom: 1rem; color: #C795F0; }
+        .link-dialog label { display: block; font-size: 0.8rem; color: #888; margin-bottom: 0.25rem; }
+        .link-dialog input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #333;
+            background: #12121a;
+            color: #e4e4e7;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            outline: none;
+        }
+        .link-dialog input:focus { border-color: #C795F0; }
+        .link-dialog .btn-row { display: flex; gap: 0.5rem; justify-content: flex-end; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>CMS Content Formatter</h1>
+            <div class="subtitle">Write naturally, copy formatted markdown for Framer CMS</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar: Section picker -->
+        <div class="sidebar">
+            <h3>Recipe Sections</h3>
+            <button class="section-btn active" data-section="general" data-mode="rich">
+                General / Introduction
+                <span class="hint">Paragraphs with formatting</span>
+            </button>
+            <button class="section-btn" data-section="whylove" data-mode="bullets">
+                Why You'll Love This
+                <span class="hint">Bullet list of reasons</span>
+            </button>
+            <button class="section-btn" data-section="tips" data-mode="bullets">
+                Tips & Variations
+                <span class="hint">Bullet list of tips</span>
+            </button>
+            <button class="section-btn" data-section="ingredients" data-mode="rich">
+                Ingredients Overview
+                <span class="hint">Paragraphs about ingredients</span>
+            </button>
+            <button class="section-btn" data-section="instructions" data-mode="rich">
+                Instructions Overview
+                <span class="hint">Paragraphs about the process</span>
+            </button>
+            <button class="section-btn" data-section="faq" data-mode="faq">
+                FAQ
+                <span class="hint">Question & answer pairs</span>
+            </button>
+            <button class="section-btn" data-section="card-ingredients" data-mode="bullets">
+                Recipe Card: Ingredients
+                <span class="hint">Bullet list for recipe card</span>
+            </button>
+            <button class="section-btn" data-section="card-instructions" data-mode="steps">
+                Recipe Card: Instructions
+                <span class="hint">Numbered steps for recipe card</span>
+            </button>
+            <button class="section-btn" data-section="nutrition" data-mode="bullets">
+                Nutrition
+                <span class="hint">Bullet list of nutrition facts</span>
+            </button>
+            <button class="section-btn" data-section="short-description" data-mode="rich">
+                Short Description
+                <span class="hint">Brief recipe intro</span>
+            </button>
+        </div>
+
+        <!-- Editor panel -->
+        <div class="editor-panel">
+            <div class="panel-header">
+                <h2 id="editor-title">General / Introduction</h2>
+                <button class="clear-btn" id="clear-btn">Clear</button>
+            </div>
+
+            <!-- Rich text toolbar (shown for general/rich mode) -->
+            <div class="toolbar" id="toolbar">
+                <button id="btn-bold" title="Bold (Cmd+B)"><b>B</b></button>
+                <button id="btn-italic" title="Italic (Cmd+I)"><em>I</em></button>
+                <div class="sep"></div>
+                <button id="btn-ul" title="Bullet list">&#8226; List</button>
+                <button id="btn-ol" title="Numbered list">1. List</button>
+                <div class="sep"></div>
+                <button id="btn-link" title="Insert link">Link</button>
+            </div>
+
+            <!-- Rich editor (general, short-description) -->
+            <div class="editor-area" id="editor-rich" style="display:block">
+                <div class="rich-editor" id="rich-editor" contenteditable="true" data-placeholder="Start typing your content here..."></div>
+            </div>
+
+            <!-- FAQ editor -->
+            <div class="faq-editor" id="editor-faq" style="display:none">
+                <div id="faq-pairs"></div>
+                <button class="add-faq-btn" id="add-faq-btn">+ Add Question</button>
+            </div>
+
+            <!-- Numbered steps editor -->
+            <div class="steps-editor" id="editor-steps" style="display:none">
+                <div id="steps-list"></div>
+                <button class="add-faq-btn" id="add-step-btn">+ Add Step</button>
+            </div>
+
+            <!-- Bullet list editor -->
+            <div class="bullet-editor" id="editor-bullets" style="display:none">
+                <div id="bullets-list"></div>
+                <button class="add-faq-btn" id="add-bullet-btn">+ Add Item</button>
+            </div>
+        </div>
+
+        <!-- Output panel -->
+        <div class="output-panel">
+            <div class="panel-header">
+                <h2>CMS Output</h2>
+                <div style="display:flex;gap:0.5rem">
+                    <button class="copy-btn" id="copy-btn">Copy to Clipboard</button>
+                </div>
+            </div>
+            <div class="output-area">
+                <div class="output-text" id="output-text"></div>
+                <div class="preview-section">
+                    <div class="preview-label">Preview (how it will render)</div>
+                    <div class="preview-box" id="preview-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link dialog -->
+    <div class="link-dialog-overlay" id="link-dialog">
+        <div class="link-dialog">
+            <h3>Insert Link</h3>
+            <label>Link Text</label>
+            <input type="text" id="link-text" placeholder="Click here">
+            <label>URL</label>
+            <input type="text" id="link-url" placeholder="https://example.com">
+            <div class="btn-row">
+                <button class="clear-btn" id="link-cancel">Cancel</button>
+                <button class="copy-btn" id="link-insert">Insert</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // STATE
+        // ============================================================
+        let currentMode = 'rich'; // rich, faq, steps, bullets
+        let currentSection = 'general';
+        let savedSelection = null;
+
+        // ============================================================
+        // SECTION SWITCHING
+        // ============================================================
+        document.querySelectorAll('.section-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSection = btn.dataset.section;
+                currentMode = btn.dataset.mode;
+                document.getElementById('editor-title').textContent = btn.childNodes[0].textContent.trim();
+                showEditor(currentMode);
+            });
+        });
+
+        function showEditor(mode) {
+            document.getElementById('editor-rich').style.display = mode === 'rich' ? 'block' : 'none';
+            document.getElementById('editor-faq').style.display = mode === 'faq' ? 'block' : 'none';
+            document.getElementById('editor-steps').style.display = mode === 'steps' ? 'block' : 'none';
+            document.getElementById('editor-bullets').style.display = mode === 'bullets' ? 'block' : 'none';
+            document.getElementById('toolbar').style.display = mode === 'rich' ? 'flex' : 'none';
+            updateOutput();
+        }
+
+        // ============================================================
+        // RICH TEXT EDITOR
+        // ============================================================
+        const richEditor = document.getElementById('rich-editor');
+
+        document.getElementById('btn-bold').addEventListener('click', () => {
+            document.execCommand('bold');
+            richEditor.focus();
+        });
+        document.getElementById('btn-italic').addEventListener('click', () => {
+            document.execCommand('italic');
+            richEditor.focus();
+        });
+        document.getElementById('btn-ul').addEventListener('click', () => {
+            document.execCommand('insertUnorderedList');
+            richEditor.focus();
+        });
+        document.getElementById('btn-ol').addEventListener('click', () => {
+            document.execCommand('insertOrderedList');
+            richEditor.focus();
+        });
+
+        // Keyboard shortcuts
+        richEditor.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'b') { e.preventDefault(); document.execCommand('bold'); }
+            if ((e.metaKey || e.ctrlKey) && e.key === 'i') { e.preventDefault(); document.execCommand('italic'); }
+        });
+
+        // Link insertion
+        document.getElementById('btn-link').addEventListener('click', () => {
+            const sel = window.getSelection();
+            if (sel.rangeCount > 0) { savedSelection = sel.getRangeAt(0).cloneRange(); }
+            const selectedText = sel.toString();
+            document.getElementById('link-text').value = selectedText || '';
+            document.getElementById('link-url').value = '';
+            document.getElementById('link-dialog').classList.add('visible');
+            document.getElementById(selectedText ? 'link-url' : 'link-text').focus();
+        });
+
+        document.getElementById('link-cancel').addEventListener('click', () => {
+            document.getElementById('link-dialog').classList.remove('visible');
+        });
+
+        document.getElementById('link-insert').addEventListener('click', () => {
+            const text = document.getElementById('link-text').value;
+            const url = document.getElementById('link-url').value;
+            if (!text || !url) return;
+            document.getElementById('link-dialog').classList.remove('visible');
+            richEditor.focus();
+            if (savedSelection) {
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(savedSelection);
+                // Delete selected text first
+                document.execCommand('delete');
+            }
+            const linkHtml = `<a href="${url}">${text}</a>`;
+            document.execCommand('insertHTML', false, linkHtml);
+        });
+
+        // Live update on input
+        richEditor.addEventListener('input', updateOutput);
+
+        // ============================================================
+        // FAQ EDITOR
+        // ============================================================
+        const faqPairs = document.getElementById('faq-pairs');
+        document.getElementById('add-faq-btn').addEventListener('click', () => addFaqPair());
+
+        function addFaqPair(question = '', answer = '') {
+            const div = document.createElement('div');
+            div.className = 'faq-pair';
+            div.innerHTML = `
+                <button class="remove-btn" title="Remove">&times;</button>
+                <label>Question</label>
+                <input type="text" class="faq-q" value="${escapeHtml(question)}" placeholder="Where can I find guava paste?">
+                <label style="margin-top:0.5rem">Answer</label>
+                <textarea class="faq-a" placeholder="Look in the Latin foods section of most grocery stores...">${escapeHtml(answer)}</textarea>
+            `;
+            div.querySelector('.remove-btn').addEventListener('click', () => { div.remove(); updateOutput(); });
+            div.querySelectorAll('input, textarea').forEach(el => el.addEventListener('input', updateOutput));
+            faqPairs.appendChild(div);
+            updateOutput();
+        }
+
+        // Start with 2 empty FAQ pairs
+        addFaqPair();
+        addFaqPair();
+
+        // ============================================================
+        // STEPS EDITOR (numbered list)
+        // ============================================================
+        const stepsList = document.getElementById('steps-list');
+        document.getElementById('add-step-btn').addEventListener('click', () => addStep());
+
+        function addStep(text = '') {
+            const div = document.createElement('div');
+            div.className = 'step-item';
+            const count = stepsList.children.length + 1;
+            div.innerHTML = `
+                <div class="step-number">${count}</div>
+                <textarea class="step-text" placeholder="Describe this step...">${escapeHtml(text)}</textarea>
+                <button class="remove-btn" title="Remove">&times;</button>
+            `;
+            div.querySelector('.remove-btn').addEventListener('click', () => { div.remove(); renumberSteps(); updateOutput(); });
+            div.querySelector('textarea').addEventListener('input', updateOutput);
+            stepsList.appendChild(div);
+            updateOutput();
+        }
+
+        function renumberSteps() {
+            stepsList.querySelectorAll('.step-item').forEach((item, i) => {
+                item.querySelector('.step-number').textContent = i + 1;
+            });
+        }
+
+        // Start with 3 empty steps
+        addStep(); addStep(); addStep();
+
+        // ============================================================
+        // BULLETS EDITOR
+        // ============================================================
+        const bulletsList = document.getElementById('bullets-list');
+        document.getElementById('add-bullet-btn').addEventListener('click', () => addBullet());
+
+        function addBullet(text = '') {
+            const div = document.createElement('div');
+            div.className = 'bullet-item step-item';
+            div.innerHTML = `
+                <div class="bullet-dot"></div>
+                <textarea class="bullet-text" placeholder="List item...">${escapeHtml(text)}</textarea>
+                <button class="remove-btn" title="Remove">&times;</button>
+            `;
+            div.querySelector('.remove-btn').addEventListener('click', () => { div.remove(); updateOutput(); });
+            div.querySelector('textarea').addEventListener('input', updateOutput);
+            bulletsList.appendChild(div);
+            updateOutput();
+        }
+
+        // Start with 3 empty bullets
+        addBullet(); addBullet(); addBullet();
+
+        // ============================================================
+        // CLEAR BUTTON
+        // ============================================================
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            if (currentMode === 'rich') {
+                richEditor.innerHTML = '';
+            } else if (currentMode === 'faq') {
+                faqPairs.innerHTML = '';
+                addFaqPair(); addFaqPair();
+            } else if (currentMode === 'steps') {
+                stepsList.innerHTML = '';
+                addStep(); addStep(); addStep();
+            } else if (currentMode === 'bullets') {
+                bulletsList.innerHTML = '';
+                addBullet(); addBullet(); addBullet();
+            }
+            updateOutput();
+        });
+
+        // ============================================================
+        // OUTPUT GENERATION
+        // ============================================================
+        function updateOutput() {
+            let markdown = '';
+
+            if (currentMode === 'rich') {
+                markdown = htmlToMarkdown(richEditor);
+            } else if (currentMode === 'faq') {
+                const pairs = [];
+                faqPairs.querySelectorAll('.faq-pair').forEach(pair => {
+                    const q = pair.querySelector('.faq-q').value.trim();
+                    const a = pair.querySelector('.faq-a').value.trim();
+                    if (q || a) { pairs.push({ q, a }); }
+                });
+                markdown = pairs.map(p => `**${p.q}**\n${p.a}`).join('\n');
+            } else if (currentMode === 'steps') {
+                const steps = [];
+                stepsList.querySelectorAll('.step-text').forEach((ta, i) => {
+                    const text = ta.value.trim();
+                    if (text) { steps.push(`${i + 1}. ${text}`); }
+                });
+                markdown = steps.join('\n');
+            } else if (currentMode === 'bullets') {
+                const items = [];
+                bulletsList.querySelectorAll('.bullet-text').forEach(ta => {
+                    const text = ta.value.trim();
+                    if (text) { items.push(`- ${text}`); }
+                });
+                markdown = items.join('\n');
+            }
+
+            document.getElementById('output-text').textContent = markdown;
+            renderPreview(markdown);
+        }
+
+        // Convert contenteditable HTML to our markdown format
+        function htmlToMarkdown(container) {
+            const lines = [];
+            const nodes = container.childNodes;
+
+            for (const node of nodes) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const text = node.textContent.trim();
+                    if (text) lines.push(text);
+                    continue;
+                }
+
+                if (node.nodeType !== Node.ELEMENT_NODE) continue;
+                const tag = node.tagName.toLowerCase();
+
+                if (tag === 'ul') {
+                    for (const li of node.querySelectorAll('li')) {
+                        lines.push('- ' + inlineToMarkdown(li));
+                    }
+                } else if (tag === 'ol') {
+                    let num = 1;
+                    for (const li of node.querySelectorAll('li')) {
+                        lines.push(`${num}. ` + inlineToMarkdown(li));
+                        num++;
+                    }
+                } else if (tag === 'br') {
+                    // skip lone BRs
+                } else {
+                    // div, p, span, etc.
+                    const text = inlineToMarkdown(node);
+                    if (text.trim()) lines.push(text.trim());
+                }
+            }
+
+            return lines.join('\n');
+        }
+
+        // Convert inline HTML elements to markdown syntax
+        function inlineToMarkdown(el) {
+            let result = '';
+            for (const child of el.childNodes) {
+                if (child.nodeType === Node.TEXT_NODE) {
+                    result += child.textContent;
+                } else if (child.nodeType === Node.ELEMENT_NODE) {
+                    const tag = child.tagName.toLowerCase();
+                    const inner = inlineToMarkdown(child);
+                    if (tag === 'b' || tag === 'strong') {
+                        result += `**${inner}**`;
+                    } else if (tag === 'i' || tag === 'em') {
+                        result += `*${inner}*`;
+                    } else if (tag === 'a') {
+                        const href = child.getAttribute('href') || '';
+                        result += `[${inner}](${href})`;
+                    } else if (tag === 'br') {
+                        result += '\n';
+                    } else {
+                        result += inner;
+                    }
+                }
+            }
+            return result;
+        }
+
+        // ============================================================
+        // PREVIEW RENDERING (mimics the Framer components)
+        // ============================================================
+        function renderPreview(markdown) {
+            if (!markdown.trim()) {
+                document.getElementById('preview-box').innerHTML = '<span style="color:#999">Preview will appear here...</span>';
+                return;
+            }
+
+            const lines = markdown.split('\n');
+            let html = '';
+            let i = 0;
+
+            while (i < lines.length) {
+                const line = lines[i].trim();
+                if (!line) { i++; continue; }
+
+                // Numbered list
+                if (/^\d+\.\s/.test(line)) {
+                    html += '<ol>';
+                    while (i < lines.length && /^\d+\.\s/.test(lines[i].trim())) {
+                        html += '<li>' + renderInline(lines[i].trim().replace(/^\d+\.\s/, '')) + '</li>';
+                        i++;
+                    }
+                    html += '</ol>';
+                    continue;
+                }
+
+                // Bullet list
+                if (line.startsWith('- ') || line.startsWith('* ')) {
+                    html += '<ul>';
+                    while (i < lines.length && (lines[i].trim().startsWith('- ') || lines[i].trim().startsWith('* '))) {
+                        html += '<li>' + renderInline(lines[i].trim().replace(/^[-*]\s/, '')) + '</li>';
+                        i++;
+                    }
+                    html += '</ul>';
+                    continue;
+                }
+
+                // Paragraph
+                html += '<p>' + renderInline(line) + '</p>';
+                i++;
+            }
+
+            document.getElementById('preview-box').innerHTML = html;
+        }
+
+        function renderInline(text) {
+            return text
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/(?<!\*)\*(?!\*)(.+?)\*(?!\*)/g, '<em>$1</em>')
+                .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:#C795F0">$1</a>');
+        }
+
+        // ============================================================
+        // COPY TO CLIPBOARD
+        // ============================================================
+        document.getElementById('copy-btn').addEventListener('click', () => {
+            const text = document.getElementById('output-text').textContent;
+            if (!text) return;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy to Clipboard';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+
+        // ============================================================
+        // HELPERS
+        // ============================================================
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // Initial output
+        updateOutput();
+    </script>
+</body>
+</html>

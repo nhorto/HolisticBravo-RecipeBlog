@@ -1,0 +1,15 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large media (947 frames, 181MB)
+recipe-images/
+
+# Claude Code
+.claude/
+
+# Node
+node_modules/
+
+# Misc
+*.log

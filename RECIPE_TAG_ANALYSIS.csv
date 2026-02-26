@@ -1,0 +1,39 @@
+Recipe_Name,Category_Text,Cuisine_Text,Diet_Text,Categories_Tags,Cuisines_Tags,Diet_Types_Tags,Has_Categories,Has_Cuisines,Has_DietTypes,FAQ_Broken
+Cozy Chunky Oatmeal,"Breakfast, Vegan, Plant-Based, Whole Food, Quick& Easy",American,"Vegetarian, Vegan (with plant milk)","breakfast,pre-workout,post-workout,quick-easy",,"vegetarian,vegan,plant-based,whole-food",YES,NO,YES,NO
+High Protein Chocolate Chip Pumpkin Muffins,"Dessert, Snack, Breakfast, High-Protein, Snack",American,"Vegetarian, Plant-Based","breakfast,snack,side-dish,dessert,post-workout,pre-workout",,"vegetarian,high-protein",YES,NO,YES,YES
+High-Protein Vegetarian Breakfast Bowl,"Breakfast, High-Protein",American,"Vegetarian, High-Protein","breakfast,post-workout",,"high-protein,vegetarian",YES,NO,YES,YES
+Two-Ingredient Chocolate Protein Cosmic Muffins,"Dessert, Snack, High-Protein, Vegetarian, Quick & Easy",American,"Vegetarian, High-Protein, Gluten-Free","pre-workout,post-workout,snack,dessert,quick-easy",,"high-protein,vegetarian",YES,NO,YES,YES
+High-Protein Chocolate Mug Pie,"Dessert, Snack, Vegetarian, High-Protein",American,"Vegetarian, High-Protein, Gluten-Free","quick-easy,snack,dessert,post-workout",,"vegetarian,high-protein",YES,NO,YES,YES
+High-Protein Peanut Butter Chocolate Truffles,"Dessert, Snack, High-Protein, Vegetarian",American,"Vegetarian, High-Protein, Gluten-Free","pre-workout,post-workout,dessert,snack,quick-easy",,"high-protein,vegetarian",YES,NO,YES,YES
+Sweet Potato Tapioca Balls,"Snack, Side Dish","Asian, Fusion","Vegetarian, Gluten-Free, Vegan","snack,side-dish","asian,fusion","vegetarian,vegan,whole-food,plant-based",YES,YES,YES,YES
+Haunted Bean Salad,"Salad, Side Dish, Lunch, High-Protein","American, Mediterranean","Vegan, Vegetarian, Plant-Based","lunch,salad,side-dish,quick-easy","mediterranean,american","vegetarian,vegan,plant-based,whole-food,high-protein",YES,YES,YES,YES
+Bang Bang Brussels Sprouts,"Side Dish, Appetizer","Asian, Fusion","Vegan, Vegetarian, Paleo","side-dish,appetizer,quick-easy","asian,fusion","vegetarian,vegan,plant-based,whole-food",YES,YES,YES,YES
+Chickpea Blondies with Aquafaba Whipped Topping,"Dessert, Vegan, Snack",American,"Vegan, Vegetarian, Plant-Based, Gluten-Free","dessert,snack",american,"vegetarian,vegan,plant-based",YES,YES,YES,NO
+Gluten-Free Pumpkin Cake Pops,"Dessert, Snack, No Bake",American,"Vegetarian, Gluten-Free, Grain-Free","no-bake,dessert,snack,quick-easy,pre-workout,post-workout",american,"vegetarian,plant-based,vegan",YES,YES,YES,NO
+Guava and Cheese Empanadas,"Dessert, Appetizer, Snack",Latin American,Vegetarian,"dessert,snack,appetizer","latin-american,mexican",vegetarian,YES,YES,YES,NO
+No Bake High Protein Pumpkin Cheesecake Bites,"Dessert, Snack, High-Protein",American,Vegetarian,"dessert,snack,no-bake,quick-easy",american,high-protein,YES,YES,YES,NO
+High Protein Bagels,"Breakfast, Snack, High-Protein",American,Vegetarian,"snack,breakfast,quick-easy",american,"high-protein,vegetarian",YES,YES,YES,NO
+High Protein Cookie Dough,"Dessert, Snack, High-Protein",American,"Vegan, Plant-Based, Vegetarian","dessert,snack,no-bake",american,"high-protein,vegetarian",YES,YES,YES,NO
+High Protein Tofu Pasta,"Lunch, Dinner","Italian, Fusion","Vegan, Vegetarian, Plant-Based","lunch,dinner,quick-easy",italian,"vegetarian,high-protein,plant-based,vegan,whole-food",YES,YES,YES,NO
+High Protein Veggie Wraps,"Lunch, Dinner","Mediterranean, Fusion",Vegetarian,"dinner,lunch","american,mediterranean","vegetarian,vegan,plant-based,high-protein",YES,YES,YES,NO
+Homemade Black Bean Patties with High Protein Buns,"Lunch, Dinner",American,Vegetarian,"lunch,dinner",american,"plant-based,vegetarian,high-protein",YES,YES,YES,NO
+Homemade Dog Treats,Snack,American,"Vegetarian, Vegan (with vegan peanut butter)",snack,,"vegan,vegetarian",YES,NO,YES,NO
+Homemade Vegetarian McGriddle,Breakfast,American,Vegetarian,"breakfast,quick-easy",american,"high-protein,vegetarian",YES,YES,YES,NO
+Mushroom Ravioli with Ricotta Filling,"Lunch, Dinner",Italian,Vegetarian,"dinner,lunch",italian,"vegetarian,high-protein",YES,YES,YES,NO
+Tri-Color Ravioli with Spinach Pesto Filling,Dinner,"Italian, Fusion",Vegetarian,dinner,"fusion,italian","vegetarian,high-protein",YES,YES,YES,NO
+2 Ingredient Pumpkin Gnocchi,Dinner,"Italian, American",Vegetarian,"dinner,lunch,quick-easy","italian,american","vegetarian,vegan,plant-based",YES,YES,YES,NO
+Lettuce-Free Salad,Lunch,"Mediterranean, Fusion","Vegetarian, High-Protein","quick-easy,side-dish,salad,lunch","mediterranean,fusion","raw-vegan,vegetarian,vegan,plant-based,whole-food",YES,YES,YES,NO
+Spaghetti Squash with Bechamel Sauce,Dinner,"American, Italian",Vegetarian,dinner,italian,"vegetarian,keto",YES,YES,YES,NO
+High-Protein Greek Yogurt Bagel Sandwiches,Breakfast,American,"Vegetarian, High-Protein",,,,NO,NO,NO,NO
+Three-Ingredient Shortbread,Dessert,American,Vegetarian,,,,NO,NO,NO,NO
+No-Egg Pasta Pomodoro,Dinner,Italian,"Vegan, Plant-Based, Vegetarian",,,,NO,NO,NO,NO
+Overnight Chia Seed Tiramisu,Breakfast,"Italian, American","Vegetarian, High-Protein",,,,NO,NO,NO,NO
+High-Protein Greek Yogurt Crescent Rolls,"Breakfast, Side Dish",American,Vegetarian,,,,NO,NO,NO,NO
+Crispy Tofu Lettuce Wraps,"Lunch, Dinner","Asian, Fusion","Vegan, Plant-Based",,,,NO,NO,NO,NO
+Rosemary Crackers & Fresh Hummus,"Snack, Appetizer",Mediterranean,"Vegetarian, Plant-Based",,,,NO,NO,NO,NO
+Chinese-Style Steamed Eggs,Breakfast,"Chinese, Asian",Vegetarian,,,,NO,NO,NO,NO
+Spinach Ravioli,"Dinner, Lunch","Italian, Fusion",Vegetarian,,,,NO,NO,NO,NO
+Crispy Rice Bowl with Sweet Potato Tempura,"Dinner, Lunch","Fusion, Latin American",Vegetarian,,,,NO,NO,NO,NO
+Quick Vegetable Fried Rice,"Dinner, Lunch","Chinese, Asian",Vegetarian,,,,NO,NO,NO,NO
+Classic Shortbread Cookies,"Dessert, Snack",American,Vegetarian,,,,NO,NO,NO,NO
+Chinese Souffle Steamed Eggs,Breakfast,"Chinese, Asian",Vegetarian,,,,NO,NO,NO,NO
