@@ -5,9 +5,6 @@ Thumbs.db
 # Large media (947 frames, 181MB)
 assets/recipe-images/
 
-# Claude Code
-.claude/
-
 # Node
 node_modules/
 
