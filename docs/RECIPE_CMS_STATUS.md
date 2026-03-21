@@ -52,7 +52,7 @@ This work spanned two long Claude Code sessions. Here's the full story:
 ### Key Mistakes to Avoid Next Time
 - **NEVER modify component files** without explicit permission — fix the CONTENT format instead
 - **Always use CSV import** for getting multi-line content into Framer CMS — copy-paste strips newlines
-- **No blank lines between list items** in any field — the parser treats them as separate lists
+- **`instructionsOverview` uses plain paragraphs, NOT numbered lists** — match the format of the existing 45 recipes
 - **Always use first person voice** — never "Holistic Bravo shared..."
 
 ---
@@ -98,42 +98,23 @@ All saved in `content/recipes/` as individual `.md` files:
 
 **The CSV import works.** All content, formatting, bold text, bullets, and newlines display correctly in Framer CMS **except for one issue:**
 
-### Remaining Issue: Instructions Numbered List
+### ~~Remaining Issue: Instructions Numbered List~~ RESOLVED
 
-The `instructionsOverview` field in all 5 recipes has **blank lines between numbered steps**:
-
-```
-1. First step paragraph...
-
-2. Second step paragraph...
-
-3. Third step paragraph...
-```
-
-The component's `renderMarkdown()` parser treats blank lines as list boundaries, so each step becomes its own `<ol>` starting at 1. Every step displays as "1." instead of "1, 2, 3, 4..."
-
-**The fix:** Remove the blank lines between numbered steps so they form one continuous list:
-
-```
-1. First step paragraph...
-2. Second step paragraph...
-3. Third step paragraph...
-```
-
-This needs to be done in the `instructionsOverview` field of all 5 recipe `.md` files, then the CSV needs to be regenerated.
+**Fix applied March 10, 2026:** The `instructionsOverview` field doesn't need numbered lists at all — the existing 45 recipes use **plain paragraphs** separated by blank lines. Removed all numbering (`1.`, `2.`, etc.) from all 5 chia recipe `.md` files and regenerated `NEW_CHIA_RECIPES.csv`.
 
 ---
 
 ## What Needs to Happen Next
 
 ### Immediate (to finish CMS import)
-1. **Remove blank lines between numbered steps** in the `instructionsOverview` field of all 5 `.md` files
-2. **Regenerate `NEW_CHIA_RECIPES.csv`** from the updated `.md` files
-3. **Re-import the CSV** into Framer CMS (or just update the 5 existing items)
-4. **Verify** everything renders correctly
+1. ~~Remove numbered lists from `instructionsOverview`~~ ✅ Done March 10, 2026
+2. ~~Regenerate `NEW_CHIA_RECIPES.csv`~~ ✅ Done March 10, 2026
+3. **Delete the 5 chia recipes currently in Framer CMS** (they have the old numbered format)
+4. **Re-import `NEW_CHIA_RECIPES.csv`** into Framer CMS
+5. **Verify** everything renders correctly
 
 ### After That
-- Update the `/new-recipe` skill instructions to note: **no blank lines between numbered steps** in `instructionsOverview`
+- Update the `/new-recipe` skill to note: `instructionsOverview` uses plain paragraphs, NOT numbered lists
 - QA/proofread all 5 recipes for content accuracy
 - Select and assign images for each recipe in Framer
 - Finalize Blog Post #4 in Framer CMS
@@ -160,6 +141,6 @@ This needs to be done in the `instructionsOverview` field of all 5 recipe `.md` 
 1. **Framer CMS strips newlines on paste.** Always use CSV import for multi-line content.
 2. **All recipe content must be first person** ("I", "my", "me") — never third person ("Holistic Bravo shared...")
 3. **"Why You'll Love" format:** `- **Bold Lead** - Description text`
-4. **No blank lines between list items** — the `renderMarkdown()` parser treats blank lines as list boundaries, causing numbered lists to restart at 1 and bullet lists to become separate lists.
+4. **`instructionsOverview` uses plain paragraphs, NOT numbered lists** — the existing 45 recipes use narrative paragraphs separated by blank lines, not numbered steps.
 5. **Component renders section headings** — never include `#`/`##` headings in field content.
 6. **Recipe Card sections are concise** (short bullets/steps), while body sections (Introduction, Ingredients Overview, Instructions Overview) are detailed narrative paragraphs.

@@ -66,19 +66,15 @@ The dark chocolate M&Ms are completely optional but I highly recommend them. The
 ========================================
 FIELD: instructionsOverview
 ========================================
-1. I start by preheating my oven to 350°F (175°C) and preparing my muffin tin with liners or non-stick spray.
+The technique for these muffins is straightforward but requires a gentle touch. I start by preheating my oven to 350°F (175°C) and preparing my muffin tin with liners or non-stick spray.
 
-2. I add 200 grams of egg whites to a large, clean mixing bowl. I make sure the bowl is completely free of any grease or oil, as this can prevent the whites from whipping properly. Using a hand mixer or stand mixer, I whip the egg whites on high speed until they form stiff peaks. This usually takes me 3-5 minutes. I know they're ready when I can lift the beaters and the peaks stand straight up without drooping.
+I add 200 grams of egg whites to a large, clean mixing bowl. I make sure the bowl is completely free of any grease or oil, as this can prevent the whites from whipping properly. Using a hand mixer or stand mixer, I whip the egg whites on high speed until they form stiff peaks. This usually takes me 3-5 minutes. I know they're ready when I can lift the beaters and the peaks stand straight up without drooping.
 
-3. Once I have beautiful stiff peaks, it's time to add the protein powder. I add one scoop of my favorite chocolate protein powder to the whipped egg whites. Using a rubber spatula, I gently fold the protein powder into the egg whites. I use a gentle folding motion from the bottom of the bowl up and over - I want to preserve as much of the air I just whipped in as possible. The mixture should be light and fluffy, not deflated.
+Once I have beautiful stiff peaks, it's time to add the protein powder. I add one scoop of my favorite chocolate protein powder to the whipped egg whites. Using a rubber spatula, I gently fold the protein powder into the egg whites. I use a gentle folding motion from the bottom of the bowl up and over - I want to preserve as much of the air I just whipped in as possible. The mixture should be light and fluffy, not deflated.
 
-4. I divide the mixture evenly among 5 muffin cups. The batter will be very light and airy, almost like a mousse.
+I divide the mixture evenly among 5 muffin cups. The batter will be very light and airy, almost like a mousse. I bake at 350°F for 5 minutes, then remove from the oven. If I'm using dark chocolate M&Ms or chocolate chips, I add them to the tops of the muffins now. This prevents them from sinking to the bottom and ensures they stay on top for that pretty presentation.
 
-5. I bake at 350°F for 5 minutes, then remove from the oven. If I'm using dark chocolate M&Ms or chocolate chips, I add them to the tops of the muffins now. This prevents them from sinking to the bottom and ensures they stay on top for that pretty presentation.
-
-6. I return the muffins to the oven and bake for another 5 minutes, for a total baking time of 10 minutes. The muffins should be lightly golden and set to the touch.
-
-7. I let them cool slightly in the pan, then transfer to a wire rack. These are delicious warm or cold!
+I return the muffins to the oven and bake for another 5 minutes, for a total baking time of 10 minutes. The muffins should be lightly golden and set to the touch. I let them cool slightly in the pan, then transfer to a wire rack. These are delicious warm or cold!
 
 ========================================
 FIELD: faq

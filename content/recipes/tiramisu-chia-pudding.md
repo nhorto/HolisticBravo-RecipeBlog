@@ -68,15 +68,15 @@ The 2 pieces of baker's white chocolate get melted down and stirred into the alm
 ========================================
 FIELD: instructionsOverview
 ========================================
-1. I start by melting 2 pieces of baker's white chocolate. You can do this in a small microwave-safe bowl in 15-second intervals, stirring between each one, until the chocolate is completely smooth and liquid. Alternatively, use a double boiler on the stovetop if you prefer. I find that white chocolate can seize up and turn grainy if it gets too hot, so be careful not to overheat it. You want a smooth, pourable consistency.
+I start by melting 2 pieces of baker's white chocolate. You can do this in a small microwave-safe bowl in 15-second intervals, stirring between each one, until the chocolate is completely smooth and liquid. Alternatively, use a double boiler on the stovetop if you prefer. I find that white chocolate can seize up and turn grainy if it gets too hot, so be careful not to overheat it. You want a smooth, pourable consistency.
 
-2. Pour 1 cup of almond milk into a jar or container, then add the melted white chocolate and stir until it's fully incorporated. The warmth of the chocolate will blend easily into the milk. Next, I add 1 teaspoon of monk fruit sweetener and 1 tablespoon of chia seeds. I give everything a thorough stir to make sure the chia seeds are evenly distributed and not clumping together at the bottom.
+Pour 1 cup of almond milk into a jar or container, then add the melted white chocolate and stir until it's fully incorporated. The warmth of the chocolate will blend easily into the milk. Next, I add 1 teaspoon of monk fruit sweetener and 1 tablespoon of chia seeds. I give everything a thorough stir to make sure the chia seeds are evenly distributed and not clumping together at the bottom.
 
-3. Add 1 teaspoon of cocoa powder to the mixture and stir it in. Don't be alarmed if the powder rises to the top initially - this is completely normal with cocoa. I just mix it in as best I can. It will continue to settle and integrate as the pudding sets in the fridge.
+Add 1 teaspoon of cocoa powder to the mixture and stir it in. Don't be alarmed if the powder rises to the top initially - this is completely normal with cocoa. I just mix it in as best I can. It will continue to settle and integrate as the pudding sets in the fridge.
 
-4. Cover the container and place it in the refrigerator. Here's a tip I swear by: come back in about 10-15 minutes and give it one more stir. This helps redistribute the chia seeds, which tend to settle and clump during the first few minutes. After that second stir, I leave it alone and let it work its magic overnight, or for at least 6-8 hours.
+Cover the container and place it in the refrigerator. Here's a tip I swear by: come back in about 10-15 minutes and give it one more stir. This helps redistribute the chia seeds, which tend to settle and clump during the first few minutes. After that second stir, I leave it alone and let it work its magic overnight, or for at least 6-8 hours.
 
-5. When you're ready to enjoy your tiramisu chia pudding, give it a gentle stir to check the consistency - it should be thick, creamy, and pudding-like. I dust the remaining 1 teaspoon of cocoa powder over the top for that classic tiramisu look and an extra burst of chocolate flavor. Grab a spoon and dig in.
+When you're ready to enjoy your tiramisu chia pudding, give it a gentle stir to check the consistency - it should be thick, creamy, and pudding-like. I dust the remaining 1 teaspoon of cocoa powder over the top for that classic tiramisu look and an extra burst of chocolate flavor. Grab a spoon and dig in.
 
 ========================================
 FIELD: faq

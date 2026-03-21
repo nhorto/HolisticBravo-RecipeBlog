@@ -68,15 +68,15 @@ For the fruit layer, I use 1 cup of frozen blueberries. Blueberries are loaded w
 ========================================
 FIELD: instructionsOverview
 ========================================
-1. I start by adding 1 cup of Greek yogurt to a medium mixing bowl. I spoon in 1 tablespoon of agave nectar and 1 tablespoon of chia seeds. The agave blends most easily when the yogurt is at a slightly cool room temperature, but straight from the fridge works just fine too.
+I start by adding 1 cup of Greek yogurt to a medium mixing bowl. I spoon in 1 tablespoon of agave nectar and 1 tablespoon of chia seeds. The agave blends most easily when the yogurt is at a slightly cool room temperature, but straight from the fridge works just fine too.
 
-2. Using a spoon or small whisk, I mix everything together until the chia seeds and agave are evenly distributed throughout the yogurt. I want a smooth, consistent mixture with no clumps of chia seeds hiding at the bottom. I take my time here - about 30 seconds of good stirring should do it.
+Using a spoon or small whisk, I mix everything together until the chia seeds and agave are evenly distributed throughout the yogurt. I want a smooth, consistent mixture with no clumps of chia seeds hiding at the bottom. I take my time here - about 30 seconds of good stirring should do it.
 
-3. Now it's time to layer. I grab my serving jar or bowl and add a generous layer of frozen blueberries to the bottom - roughly half of the cup. I spoon about half of the chia pudding mixture on top, then add the remaining blueberries, and finish with the rest of the chia mixture. You can also do a simple two-layer version with all the blueberries on the bottom and all the pudding on top - either way looks and tastes amazing.
+Now it's time to layer. I grab my serving jar or bowl and add a generous layer of frozen blueberries to the bottom - roughly half of the cup. I spoon about half of the chia pudding mixture on top, then add the remaining blueberries, and finish with the rest of the chia mixture. You can also do a simple two-layer version with all the blueberries on the bottom and all the pudding on top - either way looks and tastes amazing.
 
-4. I cover the jar or bowl and place it in the refrigerator overnight, or for at least 6 to 8 hours. As the pudding rests, the chia seeds will absorb moisture and swell, thickening the yogurt into a rich, creamy pudding consistency. The frozen blueberries will slowly thaw and release their beautiful purple juices, creating a natural fruit compote layer that swirls into the pudding when you dig in.
+I cover the jar or bowl and place it in the refrigerator overnight, or for at least 6 to 8 hours. As the pudding rests, the chia seeds will absorb moisture and swell, thickening the yogurt into a rich, creamy pudding consistency. The frozen blueberries will slowly thaw and release their beautiful purple juices, creating a natural fruit compote layer that swirls into the pudding when you dig in.
 
-5. When I'm ready to enjoy, I give it a gentle stir or eat it layered - completely up to you. I top mine with an extra drizzle of agave if I'm feeling something sweeter, or add a handful of nuts, seeds, or granola for some crunch. This pudding is best consumed within 5 days, stored in the fridge.
+When I'm ready to enjoy, I give it a gentle stir or eat it layered - completely up to you. I top mine with an extra drizzle of agave if I'm feeling something sweeter, or add a handful of nuts, seeds, or granola for some crunch. This pudding is best consumed within 5 days, stored in the fridge.
 
 ========================================
 FIELD: faq

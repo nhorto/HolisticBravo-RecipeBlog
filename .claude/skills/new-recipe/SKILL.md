@@ -106,7 +106,7 @@ FIELD: ingredientsOverview
 ========================================
 FIELD: instructionsOverview
 ========================================
-[Numbered steps using 1. prefix with detailed explanations in FIRST PERSON woven in ("I start by...", "I find that...", "I let it sit..."). Each step is a full paragraph, not just "mix ingredients." Include sensory cues ("until golden brown", "should be thick and glossy"). Separate steps with blank lines. NO heading.]
+[Plain paragraphs in FIRST PERSON — NOT a numbered list. Each paragraph covers a step or phase of the process with detailed explanations woven in ("I start by...", "I find that...", "I let it sit..."). Each paragraph is substantial, not just "mix ingredients." Include sensory cues ("until golden brown", "should be thick and glossy"). Separate paragraphs with blank lines. NO heading. NOTE: The existing 45 recipes all use this plain paragraph format — do NOT use numbered steps (1., 2., etc.).]
 
 ========================================
 FIELD: faq

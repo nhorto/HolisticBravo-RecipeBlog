@@ -67,17 +67,17 @@ The peanut butter layer is where the protein really shines. I use a quarter cup 
 ========================================
 FIELD: instructionsOverview
 ========================================
-1. I start by adding half a cup of coconut milk to a medium mixing bowl. Then I add 1 teaspoon of monk fruit sweetener, 1 teaspoon of ground cinnamon, and 1 tablespoon of chia seeds to the bowl. I give everything a quick stir to combine before blending.
+I start by adding half a cup of coconut milk to a medium mixing bowl. Then I add 1 teaspoon of monk fruit sweetener, 1 teaspoon of ground cinnamon, and 1 tablespoon of chia seeds to the bowl. I give everything a quick stir to combine before blending.
 
-2. Using a hand blender (or transferring to a regular blender), I blend all the ingredients together until the mixture is smooth and the chia seeds are partially broken down. I find this step is important because it creates a creamier, more uniform base. You should see the mixture become slightly thicker and more cohesive after blending - that's exactly what you want.
+Using a hand blender (or transferring to a regular blender), I blend all the ingredients together until the mixture is smooth and the chia seeds are partially broken down. I find this step is important because it creates a creamier, more uniform base. You should see the mixture become slightly thicker and more cohesive after blending - that's exactly what you want.
 
-3. I pour the blended mixture into a glass jar or container. Something with a lid works best since this is going straight into the fridge. A mason jar, small Tupperware, or glass meal prep container all work perfectly here.
+I pour the blended mixture into a glass jar or container. Something with a lid works best since this is going straight into the fridge. A mason jar, small Tupperware, or glass meal prep container all work perfectly here.
 
-4. In a separate small bowl, I add a quarter cup of PB powder. I add water one tablespoon at a time, stirring between each addition, until I reach my desired consistency. I usually use about 4 tablespoons total, but the exact amount depends on the brand of PB powder. I'm looking for a thick, smooth, pourable texture - think drizzle, not paste.
+In a separate small bowl, I add a quarter cup of PB powder. I add water one tablespoon at a time, stirring between each addition, until I reach my desired consistency. I usually use about 4 tablespoons total, but the exact amount depends on the brand of PB powder. I'm looking for a thick, smooth, pourable texture - think drizzle, not paste.
 
-5. I carefully pour the peanut butter mixture over the top of the chia pudding base. You can swirl it in slightly for a marbled look, or leave it as a distinct layer on top - both ways are delicious. The PB layer will slowly sink and meld with the chia base as it sets, creating beautiful ribbons of peanut butter throughout.
+I carefully pour the peanut butter mixture over the top of the chia pudding base. You can swirl it in slightly for a marbled look, or leave it as a distinct layer on top - both ways are delicious. The PB layer will slowly sink and meld with the chia base as it sets, creating beautiful ribbons of peanut butter throughout.
 
-6. I cover the container and place it in the refrigerator to set overnight, or for a minimum of 6 hours. The chia seeds need time to absorb the liquid and expand into that thick, pudding-like consistency. When I pull it out in the morning, it should be thick, creamy, and ready to eat. I top mine with my favorite nuts, seeds, shredded coconut, or fresh fruit and enjoy.
+I cover the container and place it in the refrigerator to set overnight, or for a minimum of 6 hours. The chia seeds need time to absorb the liquid and expand into that thick, pudding-like consistency. When I pull it out in the morning, it should be thick, creamy, and ready to eat. I top mine with my favorite nuts, seeds, shredded coconut, or fresh fruit and enjoy.
 
 ========================================
 FIELD: faq

@@ -68,13 +68,13 @@ My liquid base is 1 cup of water, which keeps the calorie count low and lets the
 ========================================
 FIELD: instructionsOverview
 ========================================
-1. I start by adding one scoop (32 grams) of my favorite chocolate protein powder and 1 tablespoon of chia seeds to a jar, bowl, or container. I give them a quick stir to combine the dry ingredients before adding the liquid - this helps prevent the protein powder from clumping when it hits the water.
+I start by adding one scoop (32 grams) of my favorite chocolate protein powder and 1 tablespoon of chia seeds to a jar, bowl, or container. I give them a quick stir to combine the dry ingredients before adding the liquid - this helps prevent the protein powder from clumping when it hits the water.
 
-2. Next, I pour in 1 cup of water (or my preferred milk or milk substitute for a creamier result). Using a small frother or whisk, I blend everything together until the mixture is smooth and the protein powder is fully dissolved. I find that a milk frother works especially well here because it breaks up any clumps and ensures the chia seeds are evenly distributed throughout the liquid rather than settling in one spot.
+Next, I pour in 1 cup of water (or my preferred milk or milk substitute for a creamier result). Using a small frother or whisk, I blend everything together until the mixture is smooth and the protein powder is fully dissolved. I find that a milk frother works especially well here because it breaks up any clumps and ensures the chia seeds are evenly distributed throughout the liquid rather than settling in one spot.
 
-3. I give the mixture one final stir, then cover the container and place it in the refrigerator. I let it sit overnight, or for at least 6-8 hours. During this time, the chia seeds absorb the liquid and expand, transforming the mixture from a thin chocolate drink into a thick, creamy pudding. You'll know it's ready when the texture is gel-like and holds its shape on a spoon.
+I give the mixture one final stir, then cover the container and place it in the refrigerator. I let it sit overnight, or for at least 6-8 hours. During this time, the chia seeds absorb the liquid and expand, transforming the mixture from a thin chocolate drink into a thick, creamy pudding. You'll know it's ready when the texture is gel-like and holds its shape on a spoon.
 
-4. When I'm ready to enjoy, I pull the pudding from the fridge and give it a good stir to break up any clumps and even out the texture. I top it with 2 tablespoons of mini chocolate chips and whatever other toppings I'm in the mood for - fresh fruit, crushed nuts, seeds, coconut flakes, or a spoonful of nut butter all work wonderfully. Serve it right in the jar or transfer to a bowl, and enjoy your high-protein chocolate treat.
+When I'm ready to enjoy, I pull the pudding from the fridge and give it a good stir to break up any clumps and even out the texture. I top it with 2 tablespoons of mini chocolate chips and whatever other toppings I'm in the mood for - fresh fruit, crushed nuts, seeds, coconut flakes, or a spoonful of nut butter all work wonderfully. Serve it right in the jar or transfer to a bowl, and enjoy your high-protein chocolate treat.
 
 ========================================
 FIELD: faq
